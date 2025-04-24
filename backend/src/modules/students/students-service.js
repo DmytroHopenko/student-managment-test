@@ -15,7 +15,7 @@ const getAllStudents = async (payload) => {
         throw new ApiError(404, "Students not found");
     }
 
-    return students;
+    return { students };
 }
 
 const getStudentDetail = async (id) => {
@@ -58,10 +58,10 @@ const updateStudent = async (payload) => {
     return { message: result.message };
 }
 
-const setStudentStatus = async ({ userId, reviewerId, status }) => {
-    await checkStudentId(userId);
+const setStudentStatus = async (paylaod) => {
+    await checkStudentId(paylaod.userId);
 
-    const affectedRow = await findStudentToSetStatus({ userId, reviewerId, status });
+    const affectedRow = await findStudentToSetStatus(paylaod);
     if (affectedRow <= 0) {
         throw new ApiError(500, "Unable to disable student");
     }

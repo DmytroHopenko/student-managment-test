@@ -43,6 +43,7 @@ export const StudentAccountEdit: React.FC<StudentAccountEditProps> = ({
   const navigate = useNavigate();
 
   const studentDetail = useGetStudentDetail(id);
+  console.log(id)
 
   React.useEffect(() => {
     if (studentDetail) {

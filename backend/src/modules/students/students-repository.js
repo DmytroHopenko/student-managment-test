@@ -20,6 +20,7 @@ const findAllStudents = async (payload) => {
         LEFT JOIN user_profiles t3 ON t1.id = t3.user_id
         WHERE t1.role_id = 3`;
     let queryParams = [];
+    
     if (name) {
         query += ` AND t1.name = $${queryParams.length + 1}`;
         queryParams.push(name);
@@ -34,7 +35,7 @@ const findAllStudents = async (payload) => {
     }
     if (roll) {
         query += ` AND t3.roll = $${queryParams.length + 1}`;
-        queryParams.push(roll);
+        queryParams.push(Number(roll));
     }
 
     query += ' ORDER BY t1.id';
@@ -44,7 +45,7 @@ const findAllStudents = async (payload) => {
 }
 
 const addOrUpdateStudent = async (payload) => {
-    const query = "SELECT * FROM student_add_update($1)";
+    const query = `SELECT * FROM student_add_update($1)`;
     const queryParams = [payload];
     const { rows } = await processDBRequest({ query, queryParams });
     return rows[0];
@@ -83,7 +84,8 @@ const findStudentDetail = async (id) => {
     return rows[0];
 }
 
-const findStudentToSetStatus = async ({ userId, reviewerId, status }) => {
+const findStudentToSetStatus = async (payload) => {
+    const { userId, reviewerId, status } = payload; 
     const now = new Date();
     const query = `
         UPDATE users

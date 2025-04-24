@@ -16,6 +16,7 @@ import { Controller, UseFormReturn } from 'react-hook-form';
 
 import { StudentFilter } from '../../types';
 import { useGetClassesQuery } from '@/domains/class/api';
+// import { useGetSectionsQuery } from '@/domains/section/api';
 
 type FilterStudentProps = {
   methods: UseFormReturn<StudentFilter>;
@@ -25,6 +26,7 @@ type FilterStudentProps = {
 export const FilterStudent: React.FC<FilterStudentProps> = ({ methods, searchStudent }) => {
   const { data: classResult } = useGetClassesQuery();
   const [sections, setSections] = React.useState<string[]>([]);
+  // const { data: sectionResult } = useGetSectionsQuery();
 
   const { control, register } = methods;
 

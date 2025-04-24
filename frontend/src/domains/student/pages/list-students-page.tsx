@@ -34,6 +34,8 @@ export const ListStudents: React.FC = () => {
     setFilter(payload);
   };
 
+  console.log(data)
+
   return (
     <>
       <Box sx={{ display: 'flex', mb: 1 }}>

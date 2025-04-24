@@ -45,6 +45,8 @@ export const AddStudent = () => {
         admissionDate: getFormattedDate(admissionDate, API_DATE_FORMAT)
       };
 
+      console.log(payload)
+
       const result = await addStudent(payload).unwrap();
       toast.info(result.message);
       navigate(`/app/students`);
